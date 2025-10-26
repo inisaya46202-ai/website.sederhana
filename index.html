@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Politeknik Kampar - Portal Informasi Resmi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 50%, #FFC107 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="1.5" fill="rgba(255,255,255,0.15)"/></svg>');
+            animation: float 25s infinite linear;
+        }
+        
+        @keyframes float {
+            from { transform: translateY(0); }
+            to { transform: translateY(-60px); }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(255, 107, 53, 0.3);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        nav a {
+            position: relative;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .info-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .info-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 40px;
+            border-left: 3px solid #FF6B35;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 14px;
+            height: 14px;
+            background: #FF6B35;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px #fff, 0 0 0 6px #FF6B35;
+        }
+        
+        .prodi-badge {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(247, 147, 30, 0.1) 100%);
+            border: 2px solid #FF6B35;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header id="header" class="bg-white shadow-lg fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <img src="logo_polkam_no_background7.png" alt="Logo Politeknik Kampar" class="h-14 w-auto floating">
+                </div>
+                <div>
+                    <span class="text-2xl font-bold gradient-text">Politeknik Kampar</span>
+                    <p class="text-xs text-gray-600 font-medium">Portal Informasi Resmi</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#beranda" class="text-gray-700 hover:text-orange-600 font-semibold transition-all">Beranda</a>
+                <a href="#profil" class="text-gray-700 hover:text-orange-600 font-semibold transition-all">Profil</a>
+                <a href="#akademik" class="text-gray-700 hover:text-orange-600 font-semibold transition-all">Akademik</a>
+                <a href="#pendaftaran" class="text-gray-700 hover:text-orange-600 font-semibold transition-all">Pendaftaran</a>
+                <a href="#kontak" class="text-gray-700 hover:text-orange-600 font-semibold transition-all">Kontak</a>
+            </nav>
+            <button id="menu-toggle" class="md:hidden text-gray-700 focus:outline-none">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <a href="#beranda" class="block px-6 py-3 text-gray-700 hover:bg-orange-50 transition">Beranda</a>
+            <a href="#profil" class="block px-6 py-3 text-gray-700 hover:bg-orange-50 transition">Profil</a>
+            <a href="#akademik" class="block px-6 py-3 text-gray-700 hover:bg-orange-50 transition">Akademik</a>
+            <a href="#pendaftaran" class="block px-6 py-3 text-gray-700 hover:bg-orange-50 transition">Pendaftaran</a>
+            <a href="#kontak" class="block px-6 py-3 text-gray-700 hover:bg-orange-50 transition">Kontak</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="hero-gradient text-white pt-32 pb-20 relative">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-12 fade-in">
+                <h1 class="text-5xl md:text-6xl font-extrabold mb-6 leading-tight">
+                    Politeknik Kampar
+                </h1>
+                <p class="text-2xl md:text-3xl font-bold mb-4">
+                    Unggul, Inovatif, Terkemuka
+                </p>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+                    Lembaga Pendidikan Vokasi yang Menghasilkan Lulusan Berkualitas dan Siap Kerja di Kabupaten Kampar, Riau
+                </p>
+            </div>
+            <center><div class="fade-in" style="animation-delay: 0.3s">
+                <img src="logo_polkam_no_background7.png">
+            </div>
+            </center>
+        </div>
+    </section>
+
+    <!-- Quick Info -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="text-center p-6 bg-gradient-to-br from-orange-50 to-yellow-50 rounded-2xl shadow-md">
+                    <div class="text-4xl font-bold text-orange-600 mb-2">D2</div>
+                    <p class="text-gray-700 font-semibold">Pengolahan Kelapa Sawit</p>
+                </div>
+                <div class="text-center p-6 bg-gradient-to-br from-orange-50 to-yellow-50 rounded-2xl shadow-md">
+                    <div class="text-4xl font-bold text-orange-600 mb-2">D3</div>
+                    <p class="text-gray-700 font-semibold">Pengolahan Sawit</p>
+                </div>
+                <div class="text-center p-6 bg-gradient-to-br from-orange-50 to-yellow-50 rounded-2xl shadow-md">
+                    <div class="text-4xl font-bold text-orange-600 mb-2">D3</div>
+                    <p class="text-gray-700 font-semibold">Teknik Informatikan</p>
+                </div>
+                <div class="text-center p-6 bg-gradient-to-br from-orange-50 to-yellow-50 rounded-2xl shadow-md">
+                    <div class="text-4xl font-bold text-orange-600 mb-2">D3</div>
+                    <p class="text-gray-700 font-semibold">Perawatan dan Perbaikan Mesin</p>
+                </div>
+                 <div class="text-center p-6 bg-gradient-to-br from-orange-50 to-yellow-50 rounded-2xl shadow-md">
+                    <div class="text-4xl font-bold text-orange-600 mb-2">D4</div>
+                    <p class="text-gray-700 font-semibold">Pengolaan Perkebunan</p>
+                </div>
+                 <div class="text-center p-6 bg-gradient-to-br from-orange-50 to-yellow-50 rounded-2xl shadow-md">
+                    <div class="text-4xl font-bold text-orange-600 mb-2">D4</div>
+                    <p class="text-gray-700 font-semibold">Manajemen Agribisnis</p>
+                </div>
+                 <div class="text-center p-6 bg-gradient-to-br from-orange-50 to-yellow-50 rounded-2xl shadow-md">
+                    <div class="text-4xl font-bold text-orange-600 mb-2">D4</div>
+                    <p class="text-gray-700 font-semibold">Teknologi Rekayasa Logistik</p>
+                </div>
+                 <div class="text-center p-6 bg-gradient-to-br from-orange-50 to-yellow-50 rounded-2xl shadow-md">
+                    <div class="text-4xl font-bold text-orange-600 mb-2">D4</div>
+                    <p class="text-gray-700 font-semibold">Administrasi Bisnis Internasional</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profil Section -->
+    <section id="profil" class="py-20 bg-gradient-to-br from-gray-50 to-orange-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12">
+                <span class="gradient-text">Profil Politeknik Kampar</span>
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <img src="polkam.jpeg" alt="Gedung Politeknik Kampar" class="rounded-2xl shadow-2xl w-full">
+                </div>
+                <div class="fade-in" style="animation-delay: 0.2s">
+                    <div class="bg-white p-8 rounded-2xl shadow-xl">
+                        <h3 class="text-2xl font-bold mb-4 text-orange-600">Tentang Kami</h3>
+                        <p class="text-gray-700 text-lg leading-relaxed mb-6">
+                            Politeknik Kampar merupakan salah satu Perguruan Tinggi bidang sawit yang menyelenggarakan pendidikan vokasi di Indonesia. Politeknik Kampar menyediakan Program Studi yang mengarah ke Industri Kelapa Sawit mulai dari hilir hingga ke hulu dan berkomitmen menyediakan SDM kelapa sawit yang professional dan kompeten. Tahun 2022 Politeknik Kampar telah masuk kedalam 34 Perguruan Tinggi Vokasi Se-Indonesia dalam Kategori Klaster Utama.
+                        </p>
+                        
+                        <h3 class="text-2xl font-bold mb-4 text-orange-600">Visi</h3>
+                        <p class="text-gray-700 text-lg leading-relaxed mb-6">
+                            Terwujudnya Program Studi Administrasi Bisnis Internasional yang Unggul, Inovatif, dan Terkemuka Berbasis Teknologi Terapan pada Tahun 2032
+                        </p>
+                        
+                        <h3 class="text-2xl font-bold mb-4 text-orange-600">Misi</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3">
+                                <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-gray-700">Menyelenggarakan pendidikan vokasi berbasis praktik untuk menghasilkan lulusan kompeten, adaptif, beretika, dan siap bersaing global.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-gray-700">Mengembangkan kurikulum sesuai kebutuhan industri dan tren Administrasi bisnis internasional dengan dukungan teknologi digital, inovasi, dan kewirausahaan.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-gray-700">Melaksanakan penelitian terapan dan pengabdian masyarakat yang mendukung pengembangan ilmu, potensi daerah, UMKM, dan kesejahteraan masyarakat.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span class="text-gray-700">Membangun jejaring kerja sama nasional maupun internasional guna meningkatkan mutu pendidikan dan daya saing lulusan.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Akademik Section -->
+    <section id="akademik" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-6">
+                <span class="gradient-text">Program Studi</span>
+            </h2>
+            <p class="text-center text-gray-600 text-lg mb-12 max-w-2xl mx-auto">
+                Pilih program studi yang sesuai dengan minat dan bakat anda
+                Jangan ragu Jangan bimbang
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Teknik Informatika -->
+                <div class="card-hover bg-white rounded-2xl shadow-xl overflow-hidden border-2 border-orange-100">
+                    <div class="relative h-56 overflow-hidden bg-gradient-to-br from-blue-500 to-purple-600">
+                        <img src="ftlabor.png" alt="Teknik Informatika" class="w-full h-full object-cover opacity-80">
+                        <div class="absolute top-4 right-4 bg-white text-orange-600 px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                            D3
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="info-icon bg-blue-100 p-3 rounded-xl">
+                                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800">Teknik Informatika</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            Program studi yang mempersiapkan mahasiswa menjadi ahli teknologi informasi, pengembangan software, dan analisis data.
+                        </p>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-800 mb-2">Kompetensi:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="prodi-badge px-3 py-1 rounded-full text-sm font-medium text-orange-700">Web Development</span>
+                                <span class="prodi-badge px-3 py-1 rounded-full text-sm font-medium text-orange-700">Database</span>
+                                <span class="prodi-badge px-3 py-1 rounded-full text-sm font-medium text-orange-700">Networking</span>
+                                <span class="prodi-badge px-3 py-1 rounded-full text-sm font-medium text-orange-700">Programming</span>
+                            </div>
+                        </div>
+                        <div class="border-t pt-4">
+                            <p class="text-sm text-gray-600"><strong>Prospek Karir:</strong> Software Developer, Web Developer, System Analyst, IT Support</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Teknik Mesin -->
+                <div class="card-hover bg-white rounded-2xl shadow-xl overflow-hidden border-2 border-orange-100">
+                    <div class="relative h-56 overflow-hidden bg-gradient-to-br from-gray-600 to-gray-800">
+                        <img src="ftmesin.png" alt="Teknik Mesin" class="w-full h-full object-cover opacity-80">
+                        <div class="absolute top-4 right-4 bg-white text-orange-600 px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                            D3
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="info-icon bg-gray-100 p-3 rounded-xl">
+                                <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800">Teknik Mesin</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            Fokus pada desain, manufaktur, dan pemeliharaan sistem mekanik untuk industri manufaktur dan otomasi.
+                        </p>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-800 mb-2">Kompetensi:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="prodi-badge px-3 py-1 rounded-full text-sm font-medium text-orange-700">CAD/CAM</span>
+                                <span class="prodi-badge px-3 py-1 rounded-full text-sm font-medium text-orange-700">Manufaktur</span>
+                                <span class="prodi-badge px-3 py-1 rounded-full text-sm font-medium text-orange-700">Metrologi</span>
+                                <span class="prodi-badge px-3 py-1 rounded-full text-sm font-medium text-orange-700">Otomasi</span>
+                            </div>
+                        </div>
+                        <div class="border-t pt-4">
+                            <p class="text-sm text-gray-600"><strong>Prospek Karir:</strong> Mechanical Engineer, Production Engineer, Quality Control, Maintenance Engineer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bisnis dan Manajemen -->
+                <div class="card-hover bg-white rounded-2xl shadow-xl overflow-hidden border-2 border-orange-100">
+                    <div class="relative h-56 overflow-hidden bg-gradient-to-br from-green-500 to-teal-600">
+                        <img src="laborabi.png" alt="Bisnis dan Manajemen" class="w-full h-full object-cover opacity-80">
+                        <div class="absolute top-4 right-4 bg-white text-orange-600 px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                            D3
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="info-icon bg-green-100 p-3 rounded-xl">
+                                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800">Bisnis & Manajemen</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            Mengembangkan keterampilan kepemimpinan, manajemen sumber daya, dan strategi bisnis untuk dunia korporat.
+                        </p>
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-800 mb-2">Kompetensi:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="prodi-badge px-3 py-1 rounded-full text-sm font-medium text-orange-700">Marketing</span>
+                                <span class="prodi-badge px-3 py-1 rounded-full text-sm font-medium text-orange-700">Finance</span>
+                                <span class="prodi-badge px-3 py-1 rounded-full text-sm font-medium text-orange-700">HRM</span>
+                                <span class="prodi-badge px-3 py-1 rounded-full text-sm font-medium text-orange-700">Entrepreneurship</span>
+                            </div>
+                        </div>
+                        <div class="border-t pt-4">
+                            <p class="text-sm text-gray-600"><strong>Prospek Karir:</strong> Business Analyst, Marketing Staff, HR Officer, Entrepreneur</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fasilitas -->
+    <section class="py-20 bg-gradient-to-br from-gray-50 to-orange-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12">
+                <span class="gradient-text">Fasilitas Kampus</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card-hover bg-white rounded-2xl shadow-xl overflow-hidden">
+                    <img src="labor.kimia.png" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-3 text-orange-600">Laboratorium Canggih</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Laboratorium lengkap dengan perangkat terbaru untuk mendukung praktikum dan penelitian mahasiswa di berbagai bidang studi.
+                        </p>
+                    </div>
+                </div>
+                <div class="card-hover bg-white rounded-2xl shadow-xl overflow-hidden">
+                    <img src="lapangan.png" alt="Fasilitas Olahraga" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-3 text-orange-600">Fasilitas Olahraga</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Sarana olahraga lengkap termasuk lapangan basket, futsal, dan gym untuk mendukung kesehatan mahasiswa.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pendaftaran -->
+    <section id="pendaftaran" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-6">
+                <span class="gradient-text">Informasi Pendaftaran</span>
+            </h2>
+            <p class="text-center text-gray-600 text-lg mb-12 max-w-2xl mx-auto">
+                COMING SOON
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="bg-gradient-to-
